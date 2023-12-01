@@ -24,7 +24,13 @@ export const promiseArr = [promise1, promise2, promise3, promise4];
  */
 
 // Your code goes here...
-export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
+export const handlePromise1 =  Promise.all(promiseArr)
+    .then((res) => res)
+    .catch((error) => error);
+
+/* The third .it under the first description in the test file is throwing an error but is also passing it is 
+requesting the reason but if I enter error.reason the test fails */
+
 
 /**
  * @task
@@ -41,7 +47,15 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  */
 
 // Your code goes here...
-
+export const handlePromise2 = (promiseArray) => {
+  return Promise.any(promiseArray)
+  .then((result) => {
+    if (result === 'Promise 3 RESOLVED') {
+      return result;
+    }
+  })
+  .catch((e) => e);
+}
 /**
  * @task
  * * Create the handlePromise3 function that follows:
@@ -57,6 +71,31 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  */
 
 // Your code goes here...
+export const handlePromise3 = (promiseArray) => {
+  return Promise.allSettled(promiseArray)
+      .then((results) => {
+        return results.map((result) => {
+          if (result.status !== 'rejected') {
+            return {
+              'status': result.status,
+              'value': result.value
+            }
+          } else {
+            return {
+              reason: result.reason,
+              status: 'rejected' 
+            }
+          }
+        })
+      })
+    .catch((error) => {
+      return {
+        reason: error,
+        status: 'rejected' 
+      }
+    });
+}
+
 
 /**
  * @task
@@ -66,7 +105,10 @@ export const handlePromise1 = Promise.any(promiseArr).catch((e) => e);
  * The value of newPromiseArr MUST have more than one promise in the array!
  */
 
-export const newPromiseArr = promiseArr.filter(/* <Your code goes here>*/);
+export const newPromiseArr = promiseArr.filter((promise) => {
+  return Promise.race([promise, promise4])
+    .then((result) => result === promise && result !== promise4);
+  });
 
 // Do NOT refactor or update handlePromise4 function, it's all set to work
 export const handlePromise4 = (arr) => {

@@ -38,7 +38,7 @@ Once the package is all installed and set you can open the browser at 'http://lo
 It means that you can now fetch users data (send a Get HTTP request) with:
 
 ```JS
-const url = 'http://localhost:3000/users/'
+const url = 'http://localhost:3000/users/';
 const getData = (url) => return fetch(url);
 ```
 

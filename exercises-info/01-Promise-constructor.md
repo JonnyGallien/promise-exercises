@@ -47,7 +47,6 @@ The then() method of a Promise object takes up to two arguments: callback functi
   // The onFulfilled and onRejected callback function
   const onFulfilled = (data) => data;
   const onRejected = (reason) => reason;
-
   // Pass the callbacks as arguments into .then() method.
   promise
     .then(onFulfilled, onRejected)
