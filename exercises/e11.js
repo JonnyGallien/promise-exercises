@@ -29,10 +29,7 @@ export const usersUrl = 'http://localhost:3000/users/';
 
 const getLoginList = (data) => {
   // Your code goes here...
-  const userLogin = data.map((user) => user.login)
-  console.log(userLogin);
-
-  return userLogin;
+  return data.map((user) => user.login);
 }
 
 /**
@@ -60,8 +57,11 @@ const getData = (url) => {
 
 // Your code goes here ...
 export const result = getData(usersUrl)
-.then((res) => res.json())
-  .then((data) => getLoginList(data))
+  .then((res) => res.json())
+  .then((data) => {
+    console.log(data);
+    return getLoginList(data)
+  })
   .catch((err) => console.log(err));
 
 

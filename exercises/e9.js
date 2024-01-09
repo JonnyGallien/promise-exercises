@@ -25,7 +25,7 @@ export function iterate(arg) {
 
 export function alwaysThrows() {
   // Your code goes here...
-  throw new Error ('OH NOES');
+  throw new Error('OH NOES');
 }
 
 /**
@@ -39,7 +39,7 @@ export function alwaysThrows() {
 
 export function onReject(arg) {
   // Your code goes here...
-  if(typeof(arg) === typeof({}) && arg !== null) {
+  if (arg.message) {
     return console.log(arg.message);
   } else {
     return console.log(arg);
@@ -69,17 +69,17 @@ export function onReject(arg) {
 
 // Your code goes here...
 export const promise = Promise.resolve(iterate(1))
-  .then((i) => {iterate(i)})
-  .then((i) => {iterate(i)})
-  .then((i) => {iterate(i)})
-  .then((i) => {iterate(i)})
-  .then(() => {alwaysThrows()})
-  .then((i) => {iterate(i)})
-  .then((i) => {iterate(i)})
-  .then((i) => {iterate(i)})
-  .then((i) => {iterate(i)})
-  .then((i) => {iterate(i)})
-  .catch((i) => {onReject(i)})
+  .then((i) => iterate(i))
+  .then((i) => iterate(i))
+  .then((i) => iterate(i))
+  .then((i) => iterate(i))
+  .then(() => alwaysThrows())
+  .then((i) => iterate(i))
+  .then((i) => iterate(i))
+  .then((i) => iterate(i))
+  .then((i) => iterate(i))
+  .then((i) => iterate(i))
+  .catch((i) => onReject(i))
 
 
 
