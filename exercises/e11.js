@@ -59,8 +59,9 @@ const getData = (url) => {
 export const result = getData(usersUrl)
   .then((res) => res.json())
   .then((data) => {
-    console.log(data);
-    return getLoginList(data)
+    const loginList = getLoginList(data);
+    console.log(loginList);
+    return loginList;
   })
   .catch((err) => console.log(err));
 
